@@ -1,2 +1,2 @@
-ADS1X15
-PubSubClient
+LiquidCrystal I2C
+Encoder
