@@ -5,7 +5,7 @@ DOWNLOADS_PATH	:= $(MAKE_DIR)/.arduino/staging
 USER_PATH		:= $(MAKE_DIR)/.arduino/Arduino
 
 # ----- Setup for specific board types
-FQBN        ?= arduino:samd:adafruit_circuitplayground_m0
+FQBN        ?= adafruit:samd:adafruit_feather_m0
 # ----- Board URL links for custom boards
 ADDITIONAL_URL  :=https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
 CORE			:=adafruit:samd
