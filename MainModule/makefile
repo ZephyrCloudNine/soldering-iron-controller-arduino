@@ -121,5 +121,5 @@ fresh:
 	rm -rf src/temp
 	mkdir -p src/temp
 	cp -r ../libs src/temp;
-	cat src/temp/libs/WifiSettingsTemplate.h > src/temp/libs/WifiSettings.h
-	rm src/temp/libs/WifiSettingsTemplate.h
+	# cat src/temp/libs/WifiSettingsTemplate.h > src/temp/libs/WifiSettings.h
+	# rm src/temp/libs/WifiSettingsTemplate.h
