@@ -59,7 +59,7 @@ compile: $(ELF)
 .PHONY: compile
 
 $(ELF): $(SRC) $(HDRS)
-	arduino-cli compile -b $(FQBN) $(VFLAG) $(SRC) --config-file $(CONFIG_FILE) --output-dir $(BUILD_DIR)
+	arduino-cli compile  -b $(FQBN) $(VFLAG) $(SRC) --config-file $(CONFIG_FILE) --output-dir $(BUILD_DIR)
 
 #	Upload sketch to the board.
 upload:

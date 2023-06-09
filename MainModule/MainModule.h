@@ -1,7 +1,23 @@
 #ifndef MAIN_MODULE_H
 #define MAIN_MODULE_H
 
+#define LCD_ADDR 0x27
+#define LCD_ROWS 2
+#define LCD_COLS 16
 
+#define SERIAL_BAUDRATE 115200
 
+#define HEATER_PID_P 128
+#define HEATER_PID_I 2
+#define HEATER_PID_D 1
+
+#define HEATER_MIN_DUTY 0
+#define HEATER_MAX_DUTY 255
+
+#define THERMISTOR_GRADIENT 0.3093
+#define THERMISTOR_OFFSET 47
+#define FIXED_RESISTOR_OHMS 180
+
+#define DEFAULT_TEMP 300
 
 #endif
