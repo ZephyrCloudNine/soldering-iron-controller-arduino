@@ -19,5 +19,11 @@
 #define FIXED_RESISTOR_OHMS 180
 
 #define DEFAULT_TEMP 300
+#define MIN_TEMP 180
+#define MAX_TEMP 400
+#define TEMP_INC 5
+
+#define TEMP_POLL_INT_MS 200
+#define LCD_REFRESH_INT_MS 100
 
 #endif

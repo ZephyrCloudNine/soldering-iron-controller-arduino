@@ -18,6 +18,12 @@ LiquidCrystal_I2C lcd(LCD_ADDR,LCD_COLS,LCD_ROWS);
 uint16_t current_temp=0;
 uint16_t set_temp=DEFAULT_TEMP;
 
+uint32_t display_tick=0;
+uint32_t temp_poll_tick=0;
+
+long encoder_pos = -999;
+long new_encoder_pos = 0;
+
 byte thermometer[8] = //icon for termometer
 {
     B00100,
@@ -67,20 +73,30 @@ void setup()
 
 void loop()
 {
-    current_temp = thermistor.getTemperature();
-    heater.runPID(current_temp);
-    heater.setTarget(set_temp);
-
-    set_temp += encoder.readAndReset()/2;
-
-    static uint32_t timer=0;
+    if (millis()-temp_poll_tick>TEMP_POLL_INT_MS)
+    {
+        current_temp = thermistor.getTemperature();
+        heater.runPID(current_temp);
+        temp_poll_tick = millis();
+    }
     
-    if (millis()-timer>500)
+    heater.setTarget(set_temp);
+    
+    if (millis()-display_tick>LCD_REFRESH_INT_MS)
     {
         drawMainPage();
-        lcd.clear();   
-        timer = millis();
+        display_tick = millis();
     }
+
+    new_encoder_pos = encoder.read()/2;   
+    
+    if (new_encoder_pos>encoder_pos){set_temp += TEMP_INC;}
+    else if (new_encoder_pos<encoder_pos){set_temp -= TEMP_INC;}
+
+    if (set_temp>MAX_TEMP){set_temp = MAX_TEMP;}
+    if (set_temp<MIN_TEMP){set_temp = MIN_TEMP;}
+
+    encoder_pos = new_encoder_pos;
 }
 
 void drawBootPage()
@@ -96,6 +112,10 @@ void drawMainPage()
     lcd.setCursor(4,0);
     lcd.write(1);
     lcd.setCursor(6,0);
+    
+    if (current_temp<100)
+        lcd.print("0");
+
     lcd.print(current_temp);
     lcd.setCursor(9,0);
     lcd.write(2);
@@ -105,6 +125,10 @@ void drawMainPage()
     lcd.setCursor(4,1);
     lcd.print("S");
     lcd.setCursor(6,1);
+
+       if (set_temp<100)
+        lcd.print("0");
+
     lcd.print(set_temp);
     lcd.setCursor(9,1);
     lcd.write(2);
