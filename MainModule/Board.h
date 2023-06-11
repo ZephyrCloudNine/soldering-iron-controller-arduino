@@ -10,6 +10,6 @@
 
 #define THERMISTOR_PIN A1
 
-#define HEATER_PIN A5
+#define HEATER_PIN 5
 
 #endif
