@@ -4,6 +4,10 @@
 #include "Arduino.h"
 #include "PIDController.h"
 
+#define FREQ 500
+#define RESOLUTION 8 
+#define CHANNEL 0
+
 class HeatingElement
 {
     public:

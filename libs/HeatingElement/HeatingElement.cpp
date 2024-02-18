@@ -13,8 +13,11 @@ void HeatingElement::init(uint8_t pin)
 
     pid.begin();
 
-    pinMode(_pin,OUTPUT);
-    digitalWrite(_pin,LOW);
+    // pinMode(_pin,OUTPUT);
+    // digitalWrite(_pin,LOW);
+
+    ledcSetup(CHANNEL,FREQ,RESOLUTION);
+    ledcAttachPin(_pin,CHANNEL);
 
     initialized = true;
 }
@@ -59,7 +62,7 @@ void HeatingElement::drive(uint16_t duty)
         return;
 
     _duty = duty;
-    analogWrite(_pin,_duty);
+    ledcWrite(CHANNEL, _duty);
 }
 
 void HeatingElement::runPID(uint16_t current_val)
@@ -68,7 +71,7 @@ void HeatingElement::runPID(uint16_t current_val)
         return;
 
     _duty = pid.compute(current_val);
-    analogWrite(_pin,_duty);
+    ledcWrite(CHANNEL, _duty);
 }
 
 uint16_t HeatingElement::getDuty()

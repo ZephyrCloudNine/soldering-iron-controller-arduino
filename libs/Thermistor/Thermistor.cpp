@@ -31,7 +31,7 @@ float Thermistor::getTemperature()
 
     for (uint8_t i=0;i<10;i++)
     {
-        Vo = analogRead(A0);
+        Vo = analogRead(_pin);
 
         if (Vo>1000)
             return NAN;
