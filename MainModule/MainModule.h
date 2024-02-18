@@ -1,7 +1,33 @@
 #ifndef MAIN_MODULE_H
 #define MAIN_MODULE_H
 
+#define LCD_ADDR 0x3C
+#define LCD_ROWS 64
+#define LCD_COLS 128
 
+#define DEBUG 1
 
+#define SERIAL_BAUDRATE 115200
+
+#define HEATER_PID_P 128
+#define HEATER_PID_I 2
+#define HEATER_PID_D 1
+
+#define HEATER_MIN_DUTY 0
+#define HEATER_MAX_DUTY 255
+
+#define THERMISTOR_GRADIENT 0.3093
+#define THERMISTOR_OFFSET 32
+#define FIXED_RESISTOR_OHMS 220
+
+#define DEFAULT_TEMP 275
+#define MIN_TEMP 180
+#define MAX_TEMP 380
+#define TEMP_INC 5
+#define TEMP_HYSTERSIS 8
+
+#define TEMP_POLL_INT_MS 200
+#define LCD_REFRESH_INT_MS 100
+#define DEBUG_INTERVAL_MS 500
 
 #endif
