@@ -24,6 +24,6 @@
 #define TEMP_INC 5
 
 #define TEMP_POLL_INT_MS 200
-#define LCD_REFRESH_INT_MS 100
+#define LCD_REFRESH_INT_MS 500
 
 #endif

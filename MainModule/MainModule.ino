@@ -9,7 +9,7 @@
 
 Thermistor thermistor;
 HeatingElement heater;
-// Encoder encoder(ENC_B_PIN,ENC_A_PIN);
+Encoder *encoder;
 
 float current_temp=0;
 uint16_t set_temp=DEFAULT_TEMP;
@@ -52,7 +52,7 @@ void setup()
     heater.setTarget(DEFAULT_TEMP);
     heater.setPIDconsts(HEATER_PID_P,HEATER_PID_I,HEATER_PID_D,HEATER_MIN_DUTY,HEATER_MAX_DUTY);
 
-    //enc_button.init(ENC_SW_PIN);
+    encoder = new Encoder(ENC_A_PIN,ENC_B_PIN);
 }
 
 void loop()
@@ -68,23 +68,25 @@ void loop()
         temp_poll_tick = millis();
     }
     
-    // heater.setTarget(set_temp);
+    heater.setTarget(set_temp);
     
-    // if (millis()-display_tick>LCD_REFRESH_INT_MS)
-    // {
-    //     drawMainPage();
-    //     display_tick = millis();
-    // }
+    if (millis()-display_tick>LCD_REFRESH_INT_MS)
+    {
+        // drawMainPage();
+        display_tick = millis();
+        Serial.print("Set temp (C) ");
+        Serial.println(set_temp);
+    }
 
-    // new_encoder_pos = encoder.read()/2;   
+    new_encoder_pos = encoder->read()/2;
     
-    // if (new_encoder_pos>encoder_pos){set_temp += TEMP_INC;}
-    // else if (new_encoder_pos<encoder_pos){set_temp -= TEMP_INC;}
+    if (new_encoder_pos>encoder_pos){set_temp += TEMP_INC;}
+    else if (new_encoder_pos<encoder_pos){set_temp -= TEMP_INC;}
 
-    // if (set_temp>MAX_TEMP){set_temp = MAX_TEMP;}
-    // if (set_temp<MIN_TEMP){set_temp = MIN_TEMP;}
+    if (set_temp>MAX_TEMP){set_temp = MAX_TEMP;}
+    if (set_temp<MIN_TEMP){set_temp = MIN_TEMP;}
 
-    // encoder_pos = new_encoder_pos;
+    encoder_pos = new_encoder_pos;
 }
 
 // void drawBootPage()
