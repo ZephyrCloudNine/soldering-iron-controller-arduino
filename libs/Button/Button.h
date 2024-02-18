@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 
-#define SHORT_PRESS_DURATION_MS 150
+#define SHORT_PRESS_DURATION_MS 100
 #define HOLD_PRESS_DURATION_MS 750
 
 class Button
